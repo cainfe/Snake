@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour
 {
-    private Vector2 direction = Vector2.right;
+    private static Vector2 defaultDirection = Vector2.right;
+    private Vector2 direction = defaultDirection;
     private List<Transform> segments;
     public Transform segmentPrefab;
 
@@ -41,6 +42,8 @@ public class Snake : MonoBehaviour
     }
 
     private void ResetState() {
+
+        // Remove Segments
         for (int i = 1; i < segments.Count; i++) {
             Destroy(segments[i].gameObject);
         }
@@ -48,7 +51,11 @@ public class Snake : MonoBehaviour
         segments.Clear();
         segments.Add(this.transform);
 
+        // Reset position
         this.transform.position = Vector3.zero;
+
+        // Reset Direction
+        direction = defaultDirection;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

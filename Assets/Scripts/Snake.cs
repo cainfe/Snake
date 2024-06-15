@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Snake : MonoBehaviour
@@ -39,9 +40,23 @@ public class Snake : MonoBehaviour
         segments.Add(newSegment);
     }
 
+    private void ResetState() {
+        for (int i = 1; i < segments.Count; i++) {
+            Destroy(segments[i].gameObject);
+        }
+
+        segments.Clear();
+        segments.Add(this.transform);
+
+        this.transform.position = Vector3.zero;
+    }
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Food")) {
             Grow();
+        }
+        else if (other.CompareTag("Obstacle")) {
+            ResetState();
         }
     }
 }

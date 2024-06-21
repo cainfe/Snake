@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Snake : MonoBehaviour
+public class Snake : MonoBehaviour, IScorable
 {
     private static Vector2 defaultDirection = Vector2.right;
     private Vector2 direction = defaultDirection;
     private Queue<Vector2> queuedDirections = new Queue<Vector2>();
     private List<Transform> segments;
     public Transform segmentPrefab;
+    public TextMeshProUGUI scoreCard;
 
     private void Start() {
         segments = new List<Transform>();
-        this.segments.Add(this.transform);
+        this.ResetState();
     }
 
     private void Update() {
@@ -46,6 +48,7 @@ public class Snake : MonoBehaviour
         newSegment.position = segments[this.segments.Count - 1].position;
 
         segments.Add(newSegment);
+        this.UpdateScoreCard();
     }
 
     private void ResetState() {
@@ -63,6 +66,9 @@ public class Snake : MonoBehaviour
 
         // Reset Direction
         direction = defaultDirection;
+
+        // Reset Score
+        this.UpdateScoreCard();
     }
 
     private void SetDirection(Vector3 direction) {
@@ -85,5 +91,13 @@ public class Snake : MonoBehaviour
         else if (other.CompareTag("Obstacle")) {
             ResetState();
         }
+    }
+
+    public int GetScore() {
+        return this.segments.Count;
+    }
+
+    public void UpdateScoreCard() {
+        scoreCard.SetText(this.GetScore().ToString());
     }
 }

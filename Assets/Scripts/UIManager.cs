@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pause : MonoBehaviour {
+public class UIManager : MonoBehaviour {
     public GameObject Canvas;
     bool Paused = false;
 

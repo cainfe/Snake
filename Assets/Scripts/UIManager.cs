@@ -14,16 +14,24 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    private void TogglePauseState() {
+    public void TogglePauseState() {
         if (Paused) {
-            Time.timeScale = 1.0f;
-            this.Canvas.SetActive(false);
-            Paused = false;
+            this.ResumeGame();
         } else {
-            Time.timeScale = 0.0f;
-            this.Canvas.SetActive(true);
-            Paused = true;
+            this.PauseGame();
         }
+    }
+
+    public void ResumeGame() {
+        Time.timeScale = 1.0f;
+        this.Canvas.SetActive(false);
+        Paused = false;
+    }
+
+    public void PauseGame() {
+        Time.timeScale = 0.0f;
+        this.Canvas.SetActive(true);
+        Paused = true;
     }
 
     public void QuitGame() {

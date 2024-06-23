@@ -21,7 +21,7 @@ public class Food : MonoBehaviour
 
             this.transform.position = new Vector3(Mathf.Round(x), Mathf.Round(y), 0f);
 
-            Collider2D colliders = Physics2D.OverlapBox(this.transform.position, transform.localScale / 2, 0f);
+            Collider2D colliders = Physics2D.OverlapBox(this.transform.position, transform.localScale / 2, 0f, 0);
 
             if (colliders != null &&
                 (colliders.CompareTag("Obstacle") ||

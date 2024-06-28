@@ -31,12 +31,27 @@ public class Food : MonoBehaviour
             }
         } while (!positionEmpty);
 
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player")) {
             RandomizePosition();
+            RandomizeTexture();
         }
+    }
+
+    private void RandomizeTexture() {
+        Sprite[] foodImages = Resources.LoadAll<Sprite>("Planets");
+
+        if (foodImages.Length == 0) {
+            Debug.LogError("No images found in Planets folder!");
+            return;
+        }
+
+        int randomIndex = Random.Range(0, foodImages.Length);
+
+        Sprite randomSprite = foodImages[randomIndex];
+
+        this.GetComponent<SpriteRenderer>().sprite = randomSprite;
     }
 }

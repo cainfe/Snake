@@ -8,6 +8,7 @@ public class Food : MonoBehaviour
 
     private void Start() {
         RandomizePosition();
+        RandomizeTexture();
     }
 
     private void RandomizePosition() {

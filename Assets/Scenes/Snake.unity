@@ -294,7 +294,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   segmentPrefab: {fileID: 465519192015871156, guid: 4f73c07b73a6a8d449c1a19561c99395, type: 3}
-  scoreCard: {fileID: 112381259}
 --- !u!1 &112381257
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770658a9a5068cc4cb5c59c6eff54661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 1185502836}
+  PauseMenuCanvas: {fileID: 1185502836}
+  Snake: {fileID: 102590789}
+  ScoreCard: {fileID: 112381259}
 --- !u!1 &179563535
 GameObject:
   m_ObjectHideFlags: 0

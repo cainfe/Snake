@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Snake : MonoBehaviour, IScorable
 {
+    public  GameObject UIManager;
+    public Transform segmentPrefab;
+
     private static Vector2 defaultDirection = Vector2.right;
     private Vector2 direction = defaultDirection;
     private Queue<Vector2> queuedDirections = new Queue<Vector2>();
     private List<Transform> segments;
-    public Transform segmentPrefab;
 
     private void Start() {
         segments = new List<Transform>();
@@ -48,7 +50,7 @@ public class Snake : MonoBehaviour, IScorable
         segments.Add(newSegment);
     }
 
-    private void ResetState() {
+    public void ResetState() {
 
         // Remove Segments
         for (int i = 1; i < segments.Count; i++) {
@@ -83,7 +85,7 @@ public class Snake : MonoBehaviour, IScorable
             Grow();
         }
         else if (other.CompareTag("Obstacle")) {
-            ResetState();
+            UIManager.GetComponent<UIManager>().EndGame();
         }
     }
 

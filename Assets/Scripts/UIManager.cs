@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour {
     public GameObject PauseMenuCanvas;
+    public GameObject EndGameMenuCanvas;
     public GameObject Snake;
     public TextMeshProUGUI ScoreCard;
     bool Paused = false;
 
     void Start() {
-        this.PauseMenuCanvas.SetActive(false);
+        this.RestartGame();
     }
 
     void Update() {
@@ -39,8 +40,20 @@ public class UIManager : MonoBehaviour {
         Paused = true;
     }
 
+    public void RestartGame() {
+        Snake.GetComponent<Snake>().ResetState();
+        this.PauseMenuCanvas.SetActive(false);
+        this.EndGameMenuCanvas.SetActive(false);
+        Time.timeScale = 1.0f;
+    }
+
     public void QuitGame() {
         Application.Quit();
+    }
+
+    public void EndGame() {
+        Time.timeScale = 0.0f;
+        this.EndGameMenuCanvas.SetActive(true);
     }
 
     public void UpdateScoreCard() {

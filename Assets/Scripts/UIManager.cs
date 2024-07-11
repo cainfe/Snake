@@ -5,12 +5,14 @@ public class UIManager : MonoBehaviour {
     public GameObject PauseMenuCanvas;
     public GameObject EndGameMenuCanvas;
     private Snake Snake;
+    private HighScoreManager HighScoreManager;
     public TextMeshProUGUI ScoreCard;
     bool Paused = false;
 
     void Start() {
         Snake = FindObjectOfType<Snake>();
         Snake.OnScoreChanged += UpdateScoreCard;
+        HighScoreManager = FindObjectOfType<HighScoreManager>();
         this.RestartGame();
     }
 

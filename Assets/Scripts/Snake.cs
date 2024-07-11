@@ -48,6 +48,8 @@ public class Snake : MonoBehaviour, IScorable
         newSegment.position = segments[this.segments.Count - 1].position;
 
         segments.Add(newSegment);
+
+        OnScoreChanged?.Invoke(this.GetScore());
     }
 
     public void ResetState() {
@@ -65,6 +67,8 @@ public class Snake : MonoBehaviour, IScorable
 
         // Reset Direction
         direction = defaultDirection;
+
+        OnScoreChanged?.Invoke(this.GetScore());
     }
 
     private void SetDirection(Vector3 direction) {
@@ -92,4 +96,7 @@ public class Snake : MonoBehaviour, IScorable
     public int GetScore() {
         return this.segments.Count;
     }
+
+    public delegate void ScoreChangedEvent(int newScore);
+    public event ScoreChangedEvent OnScoreChanged;
 }

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour {
     bool Paused = false;
 
     void Start() {
+        Snake.GetComponent<Snake>().OnScoreChanged += UpdateScoreCard;
         this.RestartGame();
     }
 
@@ -16,8 +17,6 @@ public class UIManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             this.TogglePauseState();
         }
-
-        this.UpdateScoreCard();
     }
 
     public void TogglePauseState() {
@@ -56,7 +55,7 @@ public class UIManager : MonoBehaviour {
         this.EndGameMenuCanvas.SetActive(true);
     }
 
-    public void UpdateScoreCard() {
-        ScoreCard.SetText(Snake.GetComponent<Snake>().GetScore().ToString());
+    public void UpdateScoreCard(int newScore) {
+        ScoreCard.SetText(newScore.ToString());
     }
 }

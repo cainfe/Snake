@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour {
     private Snake Snake;
     private HighScoreManager HighScoreManager;
     public TextMeshProUGUI ScoreCard;
+    public TextMeshProUGUI HighScoreCard;
+    public TextMeshProUGUI EndingScoreCard;
     bool Paused = false;
 
     void Start() {
@@ -56,9 +58,23 @@ public class UIManager : MonoBehaviour {
     public void EndGame() {
         Time.timeScale = 0.0f;
         this.EndGameMenuCanvas.SetActive(true);
+        this.UpdateHighScoreText();
+        this.UpdateEndingScoreCard();
     }
 
     public void UpdateScoreCard(int newScore) {
         ScoreCard.SetText(newScore.ToString());
+    }
+
+    private void UpdateHighScoreText() {
+        int highScore = HighScoreManager.GetHighScore();
+        string highScoreText = "High Score: " + highScore;
+        HighScoreCard.SetText(highScoreText);
+    }
+
+    private void UpdateEndingScoreCard() {
+        int endingScore = Snake.GetScore();
+        string endingScoreText = "Your Score: " + endingScore;
+        EndingScoreCard.SetText(endingScoreText);
     }
 }

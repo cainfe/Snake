@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour {
         ScoreCard.SetText(newScore.ToString());
     }
 
-    private void UpdateHighScoreText() {
+    public void UpdateHighScoreText() {
         int highScore = HighScoreManager.GetHighScore();
         string highScoreText = "High Score: " + highScore;
         HighScoreCard.SetText(highScoreText);

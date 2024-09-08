@@ -9,7 +9,8 @@ public class UIManager : MonoBehaviour {
     public TextMeshProUGUI ScoreCard;
     public TextMeshProUGUI HighScoreCard;
     public TextMeshProUGUI EndingScoreCard;
-    bool Paused = false;
+    bool IsPaused = false;
+    bool IsOver = false;
 
     void Start() {
         Snake = FindObjectOfType<Snake>();
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void TogglePauseState() {
-        if (Paused) {
+        if (IsPaused) {
             this.ResumeGame();
         } else {
             this.PauseGame();
@@ -33,18 +34,24 @@ public class UIManager : MonoBehaviour {
     }
 
     public void ResumeGame() {
+        if (IsOver) return;
+
         Time.timeScale = 1.0f;
         this.PauseMenuCanvas.SetActive(false);
-        Paused = false;
+        IsPaused = false;
     }
 
     public void PauseGame() {
+        if (IsOver) return;
+
         Time.timeScale = 0.0f;
         this.PauseMenuCanvas.SetActive(true);
-        Paused = true;
+        IsPaused = true;
     }
 
     public void RestartGame() {
+        IsOver = false;
+        IsPaused = false;
         Snake.ResetState();
         this.PauseMenuCanvas.SetActive(false);
         this.EndGameMenuCanvas.SetActive(false);
@@ -56,6 +63,7 @@ public class UIManager : MonoBehaviour {
     }
 
     public void EndGame() {
+        IsOver = true;
         Time.timeScale = 0.0f;
         this.EndGameMenuCanvas.SetActive(true);
         this.UpdateHighScoreText();
